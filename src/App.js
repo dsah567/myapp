@@ -1,3 +1,4 @@
+import './App.css'
 import {useState} from 'react'
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <Button onClick={clic} count={count}/>
+      <Button onClick={clic} count={count}/><br/>
       <Button onClick={clic} count={count}/>
     </div>
   );
