@@ -1,24 +1,36 @@
 import './App.css'
-import {useState} from 'react'
 
-function App() {
+import React, { createContext, useContext } from 'react';
 
-  const [count,setCount]=useState(0)
+// Create a context
+const MyContext = createContext();
 
-  function clic(){
-    setCount(()=>count +1)
-  }
+// Create a component that provides values to the context
+function MyContextProvider({ children }) {
+  const contextValue = "Hello, I'm from context!";
+
+  return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;
+}
+
+// Create a component that consumes values from the context
+function MyComponent() {
+  // Use useContext to access the values from MyContext
+  const contextValue = useContext(MyContext);
 
   return (
-    <div className="App">
-      <Button onClick={clic} count={count}/><br/>
-      <Button onClick={clic} count={count}/>
+    <div>
+      <p>Value from context: {contextValue}</p>
     </div>
   );
 }
 
-function Button({onClick,count}){
-  return(<button onClick={onClick}> Button clicked {count}</button>)
+// Wrap MyComponent with the context provider to provide the context values
+function App() {
+  return (
+    <MyContextProvider>
+      <MyComponent />
+    </MyContextProvider>
+  );
 }
 
 export default App;
